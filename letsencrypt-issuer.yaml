@@ -1,0 +1,13 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Issuer
+metadata:
+  namespace: k8s-ronymesquita-site
+  name: letsencrypt-prod-issuer
+spec:
+  acme:
+    email: support@ronymesquita.site
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      # Secret resource used to store the account's private key.
+      name: letsencrypt-prod-issuer
+    http01: {}

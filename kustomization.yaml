@@ -1,0 +1,26 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+secretGenerator:
+  - name: wordpress-secret
+    envs:
+      - WORDPRESS_DB_NAME=wordpress_db_name.txt
+      - WORDPRESS_TABLE_PREFIX=wordpress_table_prefix.txt
+      - WORDPRESS_DB_HOST=wordpress_db_host.txt
+      - WORDPRESS_DB_USER=wordpress_db_user.txt
+      - WORDPRESS_DB_PASSWORD=wordpress_db_password.txt
+    type: Opaque
+  - name: wordpress-secret
+    envs:
+      - MYSQL_ROOT_PASSWORD=mariadb_root_password.txt
+      - MYSQL_DATABASE=mariadb_database.txt
+      - MYSQL_USER=mariadb_user.txt
+      - MYSQL_PASSWORD=mariadb_user_password.txt
+resources:
+  - wordpress-deployment.yaml
+  - mariadb-deployment.yaml
+  - application-ingress.yaml
+
